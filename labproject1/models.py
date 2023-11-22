@@ -4,6 +4,7 @@ from datetime import datetime
 
 
 class User(db.Model):
+    __tablename__ = "user"
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=30), nullable=False, unique=True)
 
@@ -14,12 +15,16 @@ class User(db.Model):
         return f'User {self.name}'
 
 class Category(db.Model):
+    __tablename__ = "category"    
+
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=30), nullable=False, unique=True)
 
     record = db.relationship("Record", back_populates="category", lazy="dynamic")
 
 class Record(db.Model):
+    __tablename__ = "record"    
+
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=False, nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), unique=False, nullable=False)
@@ -30,6 +35,8 @@ class Record(db.Model):
     category = db.relationship("Category", back_populates="record")
 
 class UserCategory(db.Model):
+    __tablename__ = "usercategory"
+
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=40), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), unique=False, nullable=False)

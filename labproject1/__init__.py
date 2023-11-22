@@ -12,3 +12,4 @@ migrate = Migrate(app, db)
 
 import labproject1.views
 import labproject1.models
+

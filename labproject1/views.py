@@ -4,6 +4,9 @@ import uuid
 from labproject1.serializers import UserSchema, CategorySchema, RecordSchema, UserCategorySchema
 from labproject1.models import User, Category, Record, UserCategory
 
+with app.app_context():
+    db.create_all()
+    db.session.commit()
 
 @app.route('/healthcheck')
 def healthcheck_page():
